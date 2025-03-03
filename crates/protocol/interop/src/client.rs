@@ -52,9 +52,9 @@ impl Supervisor for SupervisorClient {
         messages: &[ExecutingMessage],
         min_safety: SafetyLevel,
     ) -> Result<(), Self::Error> {
-        let mut req =         self.client
+        let mut req = self.client
             .request("supervisor_checkMessages", (messages, min_safety));
-        println!("request: {}", req.request());
+        tracing::info!("request: {}", req.request());
         req.await
             .map_err(|_| SupervisorError::RequestFailed)
     }
