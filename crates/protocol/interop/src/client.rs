@@ -54,7 +54,7 @@ impl Supervisor for SupervisorClient {
     ) -> Result<(), Self::Error> {
         let mut req = self.client
             .request("supervisor_checkMessages", (messages, min_safety));
-        tracing::info!("request: {}", req.request());
+        tracing::info!("request: {:?}", req.request());
         req.await
             .map_err(|_| SupervisorError::RequestFailed)
     }
